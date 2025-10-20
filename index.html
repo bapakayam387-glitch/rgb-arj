@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prediksi ARJ</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.run/@google/genai",
+    "@netlify/functions": "https://aistudiocdn.com/@netlify/functions@^5.0.0"
+  }
+}
+</script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="app-container">
+      <header>
+        <svg
+          class="arj-loader"
+          width="120"
+          height="85"
+          viewBox="0 0 100 80"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <text class="logo-text" x="50" y="45" text-anchor="middle">ARJ</text>
+          <text class="subtitle-text" x="50" y="70" text-anchor="middle">PREDICT</text>
+        </svg>
+        <div id="market-container">
+            <h2 id="market-name" contenteditable="true">HONGKONG</h2>
+            <p id="market-date" contenteditable="true">2 OKTOBER 2025</p>
+        </div>
+        <p>
+          Masukkan 6 hasil togel 4 digit sebelumnya. ARJ akan menganalisis pola untuk memprediksi angka keluaran berikutnya.
+        </p>
+      </header>
+      <main>
+        <div class="input-section">
+          <h2>Data Keluaran Terakhir</h2>
+          <div id="input-grid">
+            <input type="text" id="day1" maxlength="4" value="8708" pattern="\d{4}" placeholder="Hari 1" />
+            <input type="text" id="day2" maxlength="4" value="8259" pattern="\d{4}" placeholder="Hari 2" />
+            <input type="text" id="day3" maxlength="4" value="5648" pattern="\d{4}" placeholder="Hari 3" />
+            <input type="text" id="day4" maxlength="4" value="2566" pattern="\d{4}" placeholder="Hari 4" />
+            <input type="text" id="day5" maxlength="4" value="9103" pattern="\d{4}" placeholder="Hari 5" />
+            <input type="text" id="day6" maxlength="4" value="3804" pattern="\d{4}" placeholder="Hari 6" />
+          </div>
+          <button id="predict-btn">
+            <span class="button-text">Prediksi Angka Jitu</span>
+            <span class="button-icon">✨</span>
+          </button>
+        </div>
+
+        <div id="loader" class="hidden"></div>
+        
+        <div id="error-container" class="hidden">
+          <p id="error-message"></p>
+        </div>
+
+        <div id="results-container" class="hidden">
+          <div class="results-grid">
+            <div class="result-card">
+              <h3>2D</h3>
+              <p id="result-2d">--</p>
+            </div>
+            <div class="result-card">
+              <h3>3D</h3>
+              <p id="result-3d">--</p>
+            </div>
+            <div class="result-card">
+              <h3>4D</h3>
+              <p id="result-4d">--</p>
+            </div>
+          </div>
+          <div class="additional-results-grid">
+            <div class="result-card">
+                <h3>CB</h3>
+                <p id="result-tunggal">--</p>
+            </div>
+            <div class="result-card">
+                <h3>BBFS</h3>
+                <p id="result-bbfs">--</p>
+            </div>
+             <div class="result-card">
+                <h3>BB 3D</h3>
+                <p id="result-bb3d">--</p>
+            </div>
+             <div class="result-card">
+                <h3>BB 2D</h3>
+                <p id="result-bb2d">--</p>
+            </div>
+          </div>
+          <div id="confidence-section" class="result-card">
+              <h3>Tingkat Kepercayaan: <span id="confidence-level">--</span></h3>
+              <p id="confidence-reasoning">--</p>
+          </div>
+        </div>
+
+        <div id="history-container" class="hidden">
+            <h2><i class="fas fa-chart-line"></i> Tren Prediksi</h2>
+            <div class="chart-wrapper">
+                <canvas id="prediction-chart"></canvas>
+            </div>
+            <h3><i class="fas fa-history"></i> Riwayat Prediksi</h3>
+            <div id="history-table-wrapper">
+                <p>Belum ada riwayat prediksi.</p>
+            </div>
+        </div>
+      </main>
+      <footer>
+        <p>Disclaimer: Prediksi ini dihasilkan oleh sistem ARJ dan hanya untuk tujuan hiburan. Gunakan dengan bijak dan bertanggung jawab. Tidak ada jaminan kemenangan.</p>
+      </footer>
+    </div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
